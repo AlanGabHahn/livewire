@@ -2,11 +2,13 @@
 
 namespace App\Livewire;
 
-use Livewire\Component;
+use Livewire\{ Component, WithPagination };
 use App\Models\Tweet;
 
 class ShowTweets extends Component
 {
+
+    use WithPagination;
 
     public $content = 'um teste';
 
@@ -17,7 +19,7 @@ class ShowTweets extends Component
 
     public function render()
     {
-        $tweets = Tweet::with('user')->get();
+        $tweets = Tweet::with('user')->paginate(2);
         return view('livewire.show-tweets',
             ['tweets' => $tweets]
         );
